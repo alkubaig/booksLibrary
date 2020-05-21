@@ -1,0 +1,62 @@
+
+.appBackground{
+
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.background {
+
+ height: 100vh; /* Magic here */
+ justify-content: center;
+ align-items: center;
+ width:95%;
+ margin:0px auto;
+ background: light;
+
+
+}
+
+
+#books{
+  align-items: center;
+  justify-content: center;
+
+}
+
+#title {
+  text-align: center;
+  font-family: arial, sans-serif;
+}
+
+
+
+.navbar{
+  height: 100px
+}
+.navbar-brand
+{
+    width: 100%;
+    text-align: center;
+}
+
+#AddBook{
+  width:92.5%;
+  margin-top: 20px;
+  margin-left: 3.8%;
+  margin-bottom: 20px;
+}
+
+#search{
+  width:92.5%;
+  position: relative;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 3.8%;
+  border-radius: 5px;
+
+  padding: 10px;
+
+}

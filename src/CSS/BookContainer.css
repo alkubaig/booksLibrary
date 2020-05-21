@@ -1,0 +1,39 @@
+/* #books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: .5rem;
+} */
+
+
+#books {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+#bookCard{
+  margin: 20px;
+  width: 342px;
+  text-align: center;
+}
+#navBar {
+  width:30%;
+  margin-left: 35%;
+}
+
+#deleteButt{
+  position:absolute;
+  top:0;
+  right: 0;
+}
+
+#editButt{
+  position:absolute;
+  top:0;
+  left: 0;
+}
+
+Form Button {
+  margin: 10px;
+}

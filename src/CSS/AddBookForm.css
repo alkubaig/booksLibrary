@@ -1,0 +1,22 @@
+Form{
+  align-items: right;
+}
+
+
+#formField{
+  text-align: right;
+
+}
+
+
+#formLabel{
+
+    text-align: right;
+}
+
+
+#validate{
+  text-align: right;
+  color : red;
+
+}
