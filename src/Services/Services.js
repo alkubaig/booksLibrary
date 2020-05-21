@@ -1,7 +1,7 @@
 //for unique ids
 import { v4 as uuidv4 } from 'uuid';
 
-export function getBooks(){
+export const getBooks = () => {
      let books = JSON.parse(localStorage.getItem('books'))
      return books
 }
@@ -31,7 +31,7 @@ export function createBook(newBook){
   setBooks(books)
 }
 
-export function putBook(newBook){
+export function updateBook(newBook){
 
   let books = getBooks()
   var idx = books.findIndex(book => book.id == newBook.id);

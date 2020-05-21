@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Redirect } from "react-router-dom";
-import {createBook, putBook, getBook} from '../Services/Services'
+import {createBook, updateBook, getBook} from '../Services/Services'
 import {convertNumbers} from '../Services/ValidationMethods'
 
 import AddBookForm from './AddBookForm';
@@ -10,6 +10,10 @@ import {ErrorMsgs,Patterns} from '../Domains/Validation';
 
 import  {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
+const errorMsgs = Object.create(ErrorMsgs)
+const patterns = Object.create(Patterns)
+const header = Object.create(Names)
+
 class ValidateBook extends Component {
 
    constructor(props) {
@@ -17,9 +21,6 @@ class ValidateBook extends Component {
       this.state = {
         newBook: props.match.params.newBookId ==  "new" ? Object.create(Book) : getBook(props.match.params.newBookId),
         validation: Object.create(Book),
-        errorMsgs: Object.create(ErrorMsgs),
-        patterns: Object.create(Patterns),
-        Names: Object.create(Names),
         redirect : null,
         create: props.match.params.newBookId ==  "new" ? true : false
       }
@@ -37,8 +38,8 @@ class ValidateBook extends Component {
     validateInput(val,name){
 
       let validation = this.state.validation
-      let pattern =  this.state.patterns[name]
-      let error =  this.state.errorMsgs[name]
+      let pattern =  patterns[name]
+      let error =  errorMsgs[name]
 
       validation[name] = val.match(pattern) ? '' : error;
 
@@ -66,7 +67,6 @@ class ValidateBook extends Component {
 
       this.validateInput(convertedNumbers,name);
       this.setNewbook(convertedNumbers,name);
-
     }
 
     handleChange(event) {
@@ -95,7 +95,7 @@ class ValidateBook extends Component {
 
        }else {
 
-         putBook(newBook)
+         updateBook(newBook)
 
        }
           this.setState({ redirect: "/" });
@@ -118,8 +118,9 @@ class ValidateBook extends Component {
 
     render(){
        return (
-           <AddBookForm header= {this.state.Names}  newBook={this.state.newBook}
-           validation={this.state.validation} patterns = {this.state.patterns}
+           <AddBookForm
+           header= {header}  newBook={this.state.newBook}
+           validation={this.state.validation} patterns = {patterns}
            redirect={this.state.redirect}
            create={this.state.create} createFlag={this.createFlag} updateFlag={this.updateFlag}
            handleChange={this.handleChange} handleSubmit={this.handleSubmit}  validateNumbers={this.validateNumbers} />
