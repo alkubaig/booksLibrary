@@ -1,6 +1,8 @@
 import React from 'react';
 import Home from './Home';
-import ValidateBook from './ValidateBook';
+import ValidateForm from './ValidateForm';
+import {Constants} from '../Domains/Constants';
+
 
 import Navbar from 'react-bootstrap/Navbar'
 import '../CSS/App.css';
@@ -12,15 +14,13 @@ function App() {
     <Router>
     <div className="appBackground">
       <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="/" >
-      قاعدة بيانات المكتبة
-      </Navbar.Brand>
+      <Navbar.Brand href="/" > {Constants.appTitle} </Navbar.Brand>
       </Navbar>
 
       <div className="background">
         <div>
         <Switch>
-          <Route path="/AddBookForm/:newBookId" component={ValidateBook} />
+          <Route path="/AddBookForm/:newBookId" component={ValidateForm} />
           <Route exact path="/" component= {Home} />
         </Switch>
         </div>

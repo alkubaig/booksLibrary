@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { XCircle } from 'react-bootstrap-icons';
 import { PencilSquare } from 'react-bootstrap-icons';
 import  {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Constants} from '../Domains/Constants';
 
 import '../CSS/BookContainer.css';
 
@@ -17,7 +18,7 @@ function BookContainerButtons(props){
      <div>
        <Button variant="light" id="deleteButt" onClick={() =>
          {
-           if(window.confirm("(" + bookName + ") : هل ترغب في حذف الكتاب؟")){
+           if(window.confirm("(" + bookName + ") :" +  Constants.deleteAlert)){
 
              handleDelete(id,index)
          }
@@ -29,7 +30,7 @@ function BookContainerButtons(props){
        <Link to={"/AddBookForm/" + id}>
          <Button variant="light" id="editButt" onClick={e =>
            {
-             if (!window.confirm("(" + bookName + ") :"+ "هل ترغب في تعديل الكتاب؟")){
+             if (!window.confirm("(" + bookName + ") :"+ Constants.editAlert)){
                e.preventDefault()
              }
          }} >

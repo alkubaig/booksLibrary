@@ -7,14 +7,9 @@ import {convertNumbers} from '../Services/ValidationMethods'
 import AddBookForm from './AddBookForm';
 import {Names, Book} from '../Domains/Book';
 import {ErrorMsgs,Patterns} from '../Domains/Validation';
+import {Constants} from '../Domains/Constants';
 
-import  {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
-const errorMsgs = Object.create(ErrorMsgs)
-const patterns = Object.create(Patterns)
-const header = Object.create(Names)
-
-class ValidateBook extends Component {
+class ValidateForm extends Component {
 
    constructor(props) {
       super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
@@ -22,7 +17,8 @@ class ValidateBook extends Component {
         newBook: props.match.params.newBookId ==  "new" ? Object.create(Book) : getBook(props.match.params.newBookId),
         validation: Object.create(Book),
         redirect : null,
-        create: props.match.params.newBookId ==  "new" ? true : false
+        create: props.match.params.newBookId ==  "new" ? true : false,
+        createReq: true
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -38,8 +34,8 @@ class ValidateBook extends Component {
     validateInput(val,name){
 
       let validation = this.state.validation
-      let pattern =  patterns[name]
-      let error =  errorMsgs[name]
+      let pattern =  Patterns[name]
+      let error =  ErrorMsgs[name]
 
       validation[name] = val.match(pattern) ? '' : error;
 
@@ -82,50 +78,40 @@ class ValidateBook extends Component {
 
       event.preventDefault();
 
-      let editMsg =  "هل ترغب في تعديل الكتاب؟"
-      let createMsg = "هل ترغب في إضافته ككتاب جديد"
+      let editMsg =  Constants.editAlert
+      let createMsg = Constants.addAlert
 
-     if(window.confirm(this.state.create ? createMsg : editMsg)){
+      if(window.confirm(this.state.createReq ? createMsg : editMsg)){
 
-       let newBook = this.state.newBook
-
-       if (this.state.create){
-
-         createBook(newBook)
-
-       }else {
-
-         updateBook(newBook)
-
-       }
-          this.setState({ redirect: "/" });
-     }
+         let newBook = this.state.newBook
+         this.state.createReq ?  createBook(newBook) : updateBook(newBook)
+         this.setState({ redirect: "/" });
+      }
     }
 
     createFlag(){
 
       this.setState({
-          create: true
+          createReq: true
       });
 
     }
 
     updateFlag(){
       this.setState({
-          create: false
+          createReq: false
       });
     }
 
     render(){
        return (
            <AddBookForm
-           header= {header}  newBook={this.state.newBook}
-           validation={this.state.validation} patterns = {patterns}
-           redirect={this.state.redirect}
+           newBook={this.state.newBook} redirect={this.state.redirect}
+           validation={this.state.validation}
            create={this.state.create} createFlag={this.createFlag} updateFlag={this.updateFlag}
            handleChange={this.handleChange} handleSubmit={this.handleSubmit}  validateNumbers={this.validateNumbers} />
          )
     }
 }
 
-export default ValidateBook
+export default ValidateForm

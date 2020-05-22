@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -10,18 +10,14 @@ import BookContainerButtons from './BookContainerButtons';
 
 function BookContainer(props) {
 
-  let header = Object.create(Names)
+  let header = Names
   let {handleDelete} = props
   let index = props.index
   const { id,serialNum, bookName, chapter, topic, author, editor, publisher,part,year, group, visible} = props.book //destructuring
    return (
-
        <Card key={id} id= "bookCard">
-       <Card.Header>
-          <BookContainerButtons book={props.book} index={index}  handleDelete={handleDelete}/>
-          {bookName}
-      </Card.Header>
-
+        <BookContainerButtons book={props.book} index={index} handleDelete={handleDelete} />
+        <Card.Header> {bookName}</Card.Header>
         <Card.Body>
 
           <Card.Text>{header.topic} - {topic}</Card.Text>
