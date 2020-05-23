@@ -16,7 +16,7 @@ function BookContainer(props) {
   const { id,serialNum, bookName, chapter, topic, author, editor, publisher,part,year, group, visible} = props.book //destructuring
    return (
        <Card key={id} id= "bookCard">
-        <BookContainerButtons book={props.book} index={index} handleDelete={handleDelete} />
+        <BookContainerButtons book={props.book} handleDelete={handleDelete} />
         <Card.Header> {bookName}</Card.Header>
         <Card.Body>
 

@@ -12,22 +12,23 @@ function BookContainerButtons(props){
 
   const { id,bookName} = props.book //destructuring
   let handleDelete = props.handleDelete
-  let index = props.index
    return (
 
      <div>
        <Button variant="light" id="deleteButt" onClick={() =>
          {
            if(window.confirm("(" + bookName + ") :" +  Constants.deleteAlert)){
-
-             handleDelete(id,index)
+             handleDelete(id)
          }
        }} >
        <XCircle color="red" />
        </Button>
 
 
-       <Link to={"/AddBookForm/" + id}>
+       <Link to={{
+         pathname: "/AddBookForm/" + id ,
+          newBook: props.book
+        }}>
          <Button variant="light" id="editButt" onClick={e =>
            {
              if (!window.confirm("(" + bookName + ") :"+ Constants.editAlert)){

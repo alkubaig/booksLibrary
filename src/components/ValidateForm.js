@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Redirect } from "react-router-dom";
-import {createBook, updateBook, getBook} from '../Services/Services'
+import {createBookHTTP,updateBookHTTP} from '../Services/HttpCalls'
 import {convertNumbers} from '../Services/ValidationMethods'
 
 import AddBookForm from './AddBookForm';
@@ -14,12 +14,14 @@ class ValidateForm extends Component {
    constructor(props) {
       super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
       this.state = {
-        newBook: props.match.params.newBookId ==  "new" ? Object.create(Book) : getBook(props.match.params.newBookId),
+        // newBook: props.match.params.newBookId ==  "new" ? Object.create(Book) : getBook(props.match.params.newBookId),
+        newBook: props.match.params.newBookId ==  "new" ? Object.create(Book) : props.location.newBook,
+        create: props.match.params.newBookId ==  "new" ? true : false,
         validation: Object.create(Book),
         redirect : null,
-        create: props.match.params.newBookId ==  "new" ? true : false,
         createReq: true
       }
+
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
       this.validateNumbers = this.validateNumbers.bind(this)
@@ -84,8 +86,12 @@ class ValidateForm extends Component {
       if(window.confirm(this.state.createReq ? createMsg : editMsg)){
 
          let newBook = this.state.newBook
-         this.state.createReq ?  createBook(newBook) : updateBook(newBook)
-         this.setState({ redirect: "/" });
+         let success  = () => {this.setState({ redirect: "/" });}
+         let fail = (error) => {alert(error)}
+
+         this.state.createReq ?  createBookHTTP({newBook, success, fail}) : updateBookHTTP({newBook, success, fail})
+
+
       }
     }
 

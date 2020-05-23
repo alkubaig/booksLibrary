@@ -5,7 +5,7 @@ import {regToString} from '../Services/ValidationMethods'
 
 function FormField(props) {
 
-  console.log("props",props);
+  // console.log("props",props);
 
     var pattern = regToString(props.pattern);
 
@@ -29,8 +29,6 @@ function FormField(props) {
           <Col md="4">
             <Form.Label column="lg" id = "formField"> {props.property} </Form.Label>
           </Col>
-
-
 
         </Row>
       </Form.Group>
