@@ -1,6 +1,9 @@
+const baseURL = "https://library-book-server.herokuapp.com/"
+// const baseURL = "http://localhost:5000"
+
 export function getBooksHTTP(props){
 
-  fetch("http://localhost:3001/books")
+  fetch(baseURL + "books")
     .then(res => res.json())
     .then(
       (result) => {
@@ -17,7 +20,7 @@ export function getBooksHTTP(props){
 
 export function deleteBookHTTP(props){
 
-  fetch("http://localhost:3001/book/" + props.id,
+  fetch(baseURL + "book/" + props.id,
     {method: 'DELETE'})
     .then(response => {
       if (response.status >= 200 && response.status <= 299) {
@@ -33,7 +36,7 @@ export function deleteBookHTTP(props){
 export function createBookHTTP(props){
 
 
-  fetch("http://localhost:3001/book/",
+  fetch(baseURL + "book/",
     {
       method: 'POST',
       headers: {
@@ -59,7 +62,7 @@ export function createBookHTTP(props){
 
 export function updateBookHTTP(props){
 
-  fetch("http://localhost:3001/book/" + props.newBook.id,
+  fetch(baseURL + "book/" + props.newBook.id,
     {
       method: 'PUT',
       headers: {
