@@ -1,2 +1,2 @@
-web: npm run build && serve -s build
+web: react-scripts start
 
